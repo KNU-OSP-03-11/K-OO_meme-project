@@ -18,7 +18,7 @@ def insert(self, vo):
 # insert using format
 #sql = "insert into members values(%s, %s, %s, %s)"
 #vals = (id, pwd, name, email)
-    fals = (vo.id, vo.pwd, vo.name, vo.email)
+    vals = (vo.id, vo.pwd, vo.name, vo.email)
     cur.execute(sql, vals)
 
 # 4. save data
