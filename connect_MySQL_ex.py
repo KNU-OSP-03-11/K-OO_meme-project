@@ -1,3 +1,4 @@
+# 출처 : https://lucathree.github.io/python/day16/
 import pymysql
 
 # --------- edit data (insert, update, delete) example -----------
