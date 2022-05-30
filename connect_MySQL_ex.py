@@ -5,7 +5,7 @@ import pymysql
 def insert(self, vo):
 # 1. connect
 #conn = pymysql.connect(host='localhost', user='root', password='password', db='encore', charset='utf8')
-    self.conn = pymysql.connect(host='localhost', user='root', password='bumsu1208', db='encore', charset='utf8')
+    self.conn = pymysql.connect(host='localhost', user='root', password='password', db='encore', charset='utf8')
 
 # 2. create cursor
 #cur = conn.cursor()
