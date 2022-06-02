@@ -13,6 +13,7 @@ start = time.time()
 # process for collecting only words
 def process( soup_selction_list ):
     global DATA_dic
+    global DATA_T_dic
     flag = 0
     for content in soup_selction_list:
         title = content.get_text()
@@ -26,6 +27,7 @@ def process( soup_selction_list ):
                 word = ' '.join(["K",word])
                 if DATA_dic.get(word)==None:
                     DATA_dic[word] = 1
+                    DATA_T_dic[word] = " ".join(sentence)
                 else :
                     DATA_dic[word] += 1
                 flag = 0
@@ -44,6 +46,7 @@ def process( soup_selction_list ):
                     continue
                 if DATA_dic.get(word)==None:
                     DATA_dic[word] = 1
+                    DATA_T_dic[word] = " ".join(sentence)
                 else :
                     DATA_dic[word] += 1
                 break
@@ -52,28 +55,26 @@ def process( soup_selction_list ):
 url_list = []
 url_list.append(u'https://search.naver.com/search.naver?where=news&query=K&sm=tab_opt&sort=0&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Aall&is_sug_officeid=0')
 fp = open("output.txt",'w') # 확인용
-for i in range(1,1000):
+for i in range(1,100):
     url_list.append(u"https://search.naver.com/search.naver?where=news&sm=tab_pge&query=K&sort=0&photo=0&field=0&pd=0&ds=&de=&cluster_rank=18&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so:r,p:all,a:all&start={}1".format(i))
 # DATA_dic as dictionary of { "word" : "url" }
 global DATA_dic
 DATA_dic = {}
+# DATA_T_dic as dictionary of { "word" : "title" }
+global DATA_T_dic
+DATA_T_dic = {}
 for url in url_list:
     res = requests.get(url)
-
     # implement BeautifulSoup
     soup = BeautifulSoup(res.content,"html.parser")
-
-    
-
     # check for each types
     title = soup.select('a.news_tit')
-
     process(title)
 words = list(DATA_dic.keys())
 frequencies = list(DATA_dic.values())
-    
+title_s = list(DATA_T_dic.values())
 for i in range(len(words)):
-    print("{} {}".format(words[i],frequencies[i]),file=fp) # 확인용
+    print("{} {} {}".format(words[i],frequencies[i],title_s[i]),file=fp) # 확인용
 print("time : ",time.time() - start,file=fp)
 fp.close()# 확인용
 
