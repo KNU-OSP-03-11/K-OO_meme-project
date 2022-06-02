@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # It's for connecting with mySQL database
+import string
 import pymysql
 from dataclasses import dataclass
 
@@ -38,21 +39,36 @@ def searchMeme(SearchMeme):
     conn.close()
 
     result = cur.fetchone()
-    if (result == 1):
+    if (result[0] == 1):
         return True
-    elif (result == 0):
+    elif (result[0] == 0):
         return False
+
+# getMeme(search_word) search_word as 'K word'
+def getMeme(search_word : str ):
+    conn = pymysql.connect(host='localhost', user='root', password='k-oo1234', db='KOO', charset='utf8')
+    cur = conn.cursor()
+
+    searchSTR = "SELECT * FROM KOOtable WHERE word = '{}'".format(search_word)
+    cur.execute(searchSTR)
+    
+    result = cur.fetchone()
+
+    conn.commit()
+    conn.close()
+    return result 
 
 # add meme in DB. if it is arleady in DB, return False // parameter: memeClass
 def addMeme(newMeme):
     if (searchMeme(newMeme) == 1):
         print("this meme is already in DB update it")
+        updateUseFreq(newMeme,1)
         return False
 
     conn = pymysql.connect(host='localhost', user='root', password='k-oo1234', db='KOO', charset='utf8')
     cur = conn.cursor()
     
-    insertSTR = "INSERT IGNORE INTO KOOtable VALUES(%s, %s, %s, %s)"
+    insertSTR = "INSERT INTO KOOtable (word, title, useFreq, searchFreq ) VALUES(%s, %s, %s, %s)"
     insertVAL = (newMeme.word, newMeme.title, newMeme.useFreq, newMeme.searchFreq)
     cur.execute(insertSTR, insertVAL)
     
@@ -72,15 +88,15 @@ def updateUseFreq(curMeme, addUseFreq):
 
     conn = pymysql.connect(host='localhost', user='root', password='k-oo1234', db='KOO', charset='utf8')
     cur = conn.cursor()
-
-    updateSTR = "INSERT INTO KOOtable VALUES(%s, %s, %s, %s) ON DUPLICATE KEY UPDATE use_freq = use_freq + %s"
-    updateVAL = (newMeme.word, newMeme.title, newMeme.useFreq, newMeme.searchFreq, addUseFreq)
-    cur.execute(updateSTR, updateVAL)
+    
+    updateSTR = "INSERT INTO KOOtable (word, title, useFreq, searchFreq ) VALUES('{}', '{}', {}, {}) ON DUPLICATE KEY UPDATE useFreq = useFreq + {}".format(curMeme.word, curMeme.title, curMeme.useFreq, curMeme.searchFreq, str(addUseFreq))
+    
+    cur.execute(updateSTR)
 
     conn.commit()
     conn.close()
 
-   print("new meme is added ({0}, {1}, {2}, {3})".format(newMeme.word, newMeme.title, newMeme.useFreq, newMeme.searchFreq))
+    print("useFreq of meme({0}) is updated {2}+{1}".format(curMeme.word, addUseFreq,curMeme.useFreq))
     return True
 
 # update search_freq of meme. if it is not in DB, call addMeme // parameter: memeClass, int
@@ -94,14 +110,14 @@ def updateSearchFreq(curMeme, addSearchFreq):
     conn = pymysql.connect(host='localhost', user='root', password='k-oo1234', db='KOO', charset='utf8')
     cur = conn.cursor()
 
-    updateSTR = "INSERT INTO KOOtable VALUES(%s, %s, %s, %s) ON DUPLICATE KEY UPDATE search_freq = search_freq + %s"
-    updateVAL = (newMeme.word, newMeme.title, newMeme.useFreq, newMeme.searchFreq, addSearchFreq)
-    cur.execute(updateSTR, updateVAL)
+    updateSTR = "INSERT INTO KOOtable (word, title, useFreq, searchFreq ) VALUES('{}', '{}', {}, {}) ON DUPLICATE KEY UPDATE searchFreq = searchFreq + {}".format(curMeme.word, curMeme.title, curMeme.useFreq, curMeme.searchFreq, addSearchFreq)
+    
+    cur.execute(updateSTR)
 
     conn.commit()
     conn.close()
 
-    print("search_freq of meme({0}) is updated +{1}".format(curMeme.word, addSearchFreq))
+    print("searchFreq of meme({0}) is updated {2}+{1}".format(curMeme.word, addSearchFreq , curMeme.searchFreq))
 
 # Return ordered data by decrease //  parameter: int, int // return: tuple
 # 0 : ORDER BY use_freq
@@ -110,21 +126,12 @@ def rankFreq(numOfRank, useOrSearch):
     conn = pymysql.connect(host='localhost', user='root', password='k-oo1234', db='KOO', charset='utf8')
     cur = conn.cursor()
 
-    rankSTR = "SELECT * FROM KOOtable ORDER BY %s DESC"    
-    rankVAL = ('use_freq')
-    
     if (useOrSearch ==1):
-        rankVAL = ('search_freq')
-
-    cur.execute(rankSTR, rankVAL)
-
-    row = cur.fetchall()
-    if (len(row)<numOfRank):
-        numOfRank = len(row)
-
-    for i in range(0, numOfRank):
-        print(row[i])
-
+        cur.execute("SELECT * FROM KOOtable ORDER BY %s DESC",'searchFreq')
+    else:
+        cur.execute("SELECT * FROM KOOtable ORDER BY useFreq DESC")
+    row = cur.fetchmany(size = numOfRank)
+    
     conn.commit()
     conn.close()
 
@@ -150,35 +157,35 @@ def delMeme(delMeme):
 
 
 # -----------------------example of usage-------------------------------
+if __name__ == "__main__":
+    # create new meme
+    newWord = 'K'
+    newWord = 'hello K2'
+    newFreq = 3
+    newMeme = initMeme('K', 'hello K1', 3, 1)
+    addMeme(newMeme)
 
-# create new meme
-newWord = 'K'
-newWord = 'hello K2'
-newFreq = 3
-newMeme = initMeme('K', 'hello K1', 3, 1)
-addMeme(newMeme)
+    # update use_freq
+    addUseFreq = 5
+    updateUseFreq(newMeme, addUseFreq) 
 
-# update use_freq
-addUseFreq = 5
-updateUseFreq(newMeme, addUseFreq) 
+    # update search_freq
+    addSearchFreq = 5
+    updateSearchFreq(newMeme, addSearchFreq) 
 
-# update search_freq
-addSearchFreq = 5
-updateSearchFreq(newMeme, addSearchFreq) 
+    # meme rank
+    newMeme= initMeme('K2', 'hello K2', 4, 10)
+    addMeme(newMeme)
+    newMeme= initMeme('K3', 'hello K2', 5, 9)
+    addMeme(newMeme)
+    newMeme= initMeme('K4', 'hello K2', 6, 8)
+    addMeme(newMeme)
+    newMeme= initMeme('K5', 'hello K2', 7, 7)
+    addMeme(newMeme)
+    # use rank
+    rankFreq(10, 0)
+    # search rank
+    rankFreq(10, 1)
 
-# meme rank
-newMeme= initMeme('K2', 'hello K2', 4, 10)
-addMeme(newMeme)
-newMeme= initMeme('K3', 'hello K2', 5, 9)
-addMeme(newMeme)
-newMeme= initMeme('K4', 'hello K2', 6, 8)
-addMeme(newMeme)
-newMeme= initMeme('K5', 'hello K2', 7, 7)
-addMeme(newMeme)
-# use rank
-rankFreq(10, 0)
-# search rank
-rankFreq(10, 1)
-
-# delete meme
-delMeme(newMeme)
+    # delete meme
+    delMeme(newMeme)
