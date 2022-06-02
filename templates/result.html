@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search Result</title>
+        <style>
+            body { background-color: rgb(213, 221, 229); }
+            hr { border : 5px solid rgb(44, 44, 44); }
+            span { color :rgb(235, 95, 95)}
+            #contianer {
+                display : flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p>
+                {% if flag == 0 %}
+                <h1>{{input}}에 해당하는 결과가 없습니다.</h1></br>
+                {% else %}
+                    <h1>{{word}}</h1></br>
+                    <h2>대표 기사 : {{title}}</h2>
+                {% endif %}
+                </p>
+        </div>
+    </body>
+</html>

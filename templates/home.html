@@ -21,16 +21,6 @@
         <center>
         <h1>Search for <span>K - Series</span></h1>
         <hr>
-        <p>
-            <h3>Top <span>K - Series</span> of the week</h3>
-            <select onChange="window.open(this.value);" >
-                <option value>select a k-series</option>
-                <option value = "https://www.google.com/search?q=kpop">K - pop</option>
-                <option value = "https://www.google.com/search?q=k-방역">K - 방역</option>
-                <option value = "https://www.google.com/search?q=k-뷰티">K - 뷰티</option>
-                <option value = "https://www.google.com/search?q=k-기업가정신">K - 기업가정신</option>
-            </select><br>
-        </p>
             <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/%ED%83%9C%EA%B7%B9%EA%B8%B0%EB%B0%94%EB%9E%8C%EA%B0%9C%EB%B9%84.jpg" 
             width="500",height="500">
         <p>
@@ -39,10 +29,12 @@
             "K-"를 접두사로 붙이는 신조어<br>
             "다른 나라에서는 볼 수 없는 한국만의 모습, 사물, 습성 등"
             </font>
+        </br><a href=https://www.oed.com/view/Entry/92770415 target="_blank">[K-"on oxford english dictionary]</a>
+
         </p>
-            <form method = "POST" action = "comments.php">
+            <form method = "POST" action = "/search">
                 <h3>What do you want to search?</h3>
-                K - <input name="search" type="text" size="10">
+                K - <input name="input" type="text" size="10">
                 <input type = "submit" name="search" value="Search">
                 <input type = "reset" name="clear" vaule="Clear"><br>
             </form>
@@ -51,15 +43,14 @@
                 <div id="container" style="width:50%; height:100%;" >
                     <script> 
                         anychart.onDocumentReady(function () {
-                            var data = [ 
-                                { "x": "K-방역", "value": 5000, category: "government" },
-                                { "x": "K-pop", "value": 3000, category: "culture" },
-                                { "x": "K-뷰티", "value": 1000, category: "culture" },
-                                { "x": "K-기업가정신", "value": 2000, category: "society" },
-                                { "x": "K-교육", "value": 2500, category: "society" },
-                                { "x": "K-푸드", "value": 5400, category: "culture" },
-                                { "x": "K-의료", "value": 6400, category: "society" } 
-                            ]; 
+                            var data = {{cloud_list|tojson}};
+                                // { "x": "K-방역", "value": 5000, category: "government" },
+                                // { "x": "K-pop", "value": 3000, category: "culture" },
+                                // { "x": "K-뷰티", "value": 1000, category: "culture" },
+                                // { "x": "K-기업가정신", "value": 2000, category: "society" },
+                                // { "x": "K-교육", "value": 2500, category: "society" },
+                                // { "x": "K-푸드", "value": 5400, category: "culture" },
+                                // { "x": "K-의료", "value": 6400, category: "society" } 
                             var chart = anychart.tagCloud(data); 
                             chart.angles([0]); 
                             chart.container("container"); 
@@ -69,14 +60,6 @@
                         </script>
                 </div> 
             </div>
-        </p>
-        <p>
-            <form method="POST" action="cloud.php">
-                <h3>Add new word on cloud</h3>
-                K-<input name="add_cloud" type="text" size="10">
-                <input type = "submit" name="add_c" value="Submit">
-                <input type = "reset" name="clear" vaule="Clear"><br>
-            </form>
         </p>
     </center>
     </body>
