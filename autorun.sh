@@ -29,11 +29,11 @@ echo "java setup complete!"
 python -m venv pyvenv
 source pyvenv/bin/activate
 pip install requirements.txt
+echo "python venv setup complete!"
 
 sudo apt-get install mysql-server mysql-client
 sudo mysql --version
 sudo service mysql start
-
 sudo mysqladmin -u root create KOO -p
 sudo mysql -u root -p
 use mysql
@@ -47,5 +47,9 @@ useFreq INT,
 searchFreq INT
 );
 \q
-
+echo "mysql ready!"
+# run program
+python crawl_test.py
+echo "data crawling complete"
+python app.py
 
