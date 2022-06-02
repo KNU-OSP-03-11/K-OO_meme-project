@@ -28,7 +28,24 @@ echo "java setup complete!"
 # start python venv environment
 python -m venv pyvenv
 source pyvenv/bin/activate
-pip install web_crawler/requirements.txt
+pip install requirements.txt
 
+sudo apt-get install mysql-server mysql-client
+sudo mysql --version
+sudo service mysql start
+
+sudo mysqladmin -u root create KOO -p
+sudo mysql -u root -p
+use mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'k-oo1234';
+USE KOO;
+CREATE TABLE KOOtable
+(
+word VARCHAR(30) UNIQUE KEY,
+title VARCHAR(50),
+useFreq INT,
+searchFreq INT
+);
+\q
 
 
