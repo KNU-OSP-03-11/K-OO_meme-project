@@ -37,18 +37,20 @@ sudo apt-get install mysql-server mysql-client -y
 sudo mysql --version
 sudo service mysql start
 sudo mysqladmin -u root create KOO -p
-sudo mysql -u root -p
-use mysql
+sudo mysql -u root -p << EOF
+use mysql;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'k-oo1234';
 USE KOO;
 CREATE TABLE KOOtable
 (
+    id INT AUTO_INCREMENT KEY,
 word VARCHAR(30) UNIQUE KEY,
 title VARCHAR(50),
 useFreq INT,
 searchFreq INT
 );
 \q
+EOF
 echo "mysql ready!"
 # run program
 python crawl_test.py
