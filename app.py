@@ -30,6 +30,11 @@ def home():
     return render_template('home.html',cloud_list=cloud_list)
 
 
+@app.route('/home_english/')
+def home_english():
+    return render_template('home_english.html',cloud_list=cloud_list)
+
+
 @app.route('/search',methods=['POST'])
 def search(input=None):
     if request.method == 'POST':
