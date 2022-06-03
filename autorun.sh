@@ -16,8 +16,8 @@ sudo update-alternatives --config python << EOF
 EOF
 
 python --version
-sudo apt install python3-pip
-sudo apt-get install python3-venv
+sudo apt install python3-pip -y
+sudo apt-get install python3-venv -y
 echo "python setup complete!"
 
 # install java environment
@@ -30,10 +30,10 @@ echo "java setup complete!"
 # start python venv environment
 python -m venv pyvenv
 source pyvenv/bin/activate
-pip install requirements.txt
+pip install -r requirements.txt
 echo "python venv setup complete!"
 
-sudo apt-get install mysql-server mysql-client
+sudo apt-get install mysql-server mysql-client -y
 sudo mysql --version
 sudo service mysql start
 sudo mysqladmin -u root create KOO -p
