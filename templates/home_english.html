@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>K-Series</title>
+        <style>
+            body { background-color: rgb(213, 221, 229); }
+            hr { border : 5px solid rgb(44, 44, 44); }
+            span { color :rgb(235, 95, 95)}
+            #contianer {
+                display : flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto;
+            }
+        </style>
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script> 
+        <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+    </head>
+    <body>
+        <center>
+        <h1>Search for <span>K - Series</span></h1>
+        <hr>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/%ED%83%9C%EA%B7%B9%EA%B8%B0%EB%B0%94%EB%9E%8C%EA%B0%9C%EB%B9%84.jpg" 
+            width="500",height="500">
+        <p>
+            <h3>What is <span>K - Series</span>?</h3>
+            <font size="4">
+            New word : using K in front of word that already exist<br>
+	    K-series means a korean unique culture.<br>
+            
+            </font>
+        </br><a href=https://www.oed.com/view/Entry/92770415 target="_blank">["K-"on oxford english dictionary]</a>
+	<h6>*It's based on NAVER news data</h6>
+        </p>
+            <form method = "POST" action = "/search">
+                <h3>What do you want to search?</h3>
+                K - <input name="input" type="text" size="10">
+                <input type = "submit" name="search" value="Search">
+                <input type = "reset" name="clear" vaule="Clear"><br>
+            </form>
+        <p>
+            <div class="chart-area"> 
+                <div id="container" style="width:50%; height:100%;" >
+                    <script> 
+                        anychart.onDocumentReady(function () {
+                            var data = {{cloud_list|tojson}};
+                                // { "x": "K-방역", "value": 5000, category: "government" },
+                                // { "x": "K-pop", "value": 3000, category: "culture" },
+                                // { "x": "K-뷰티", "value": 1000, category: "culture" },
+                                // { "x": "K-기업가정신", "value": 2000, category: "society" },
+                                // { "x": "K-교육", "value": 2500, category: "society" },
+                                // { "x": "K-푸드", "value": 5400, category: "culture" },
+                                // { "x": "K-의료", "value": 6400, category: "society" } 
+                            var chart = anychart.tagCloud(data); 
+                            chart.angles([0]); 
+                            chart.container("container"); 
+                            chart.textSpacing(0);
+                            chart.draw(); 
+                        }); 
+                        </script>
+                </div> 
+            </div>
+        </p>
+        <a href= "/home/"> 한국어 </a> <br>
+        <a href= "/home_english/"> English </a><br>
+	
+    </center>
+    </body>
+</html>
