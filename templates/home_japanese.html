@@ -21,7 +21,7 @@
         <center>
         <h1><span>K - シリーズ</span>を検索してください。</h1>
         <hr>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/%ED%83%9C%EA%B7%B9%EA%B8%B0%EB%B0%94%EB%9E%8C%EA%B0%9C%EB%B9%84.jpg" 
+            <img src={{image_url}} 
             width="500",height="500">
         <p>
             <h3><span>K - シリーズ</span>とは？</h3>
@@ -37,6 +37,8 @@
                 <input type = "submit" name="search" value="Search">
                 <input type = "reset" name="clear" vaule="Clear"><br>
             </form>
+            <h3>最も多く検索された単語</h3>
+                {{search1}}:{{search1_i}}回   {{search2}}:{{search2_i}}回   {{search3}}:{{search3_i}}回   {{search4}}:{{search4_i}}回   {{search5}}:{{search5_i}}回
         <p>
             <div class="chart-area"> 
                 <div id="container" style="width:50%; height:100%;" >

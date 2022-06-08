@@ -21,7 +21,7 @@
         <center>
         <h1>Recherche dans la <span>série K</span></h1>
         <hr>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/%ED%83%9C%EA%B7%B9%EA%B8%B0%EB%B0%94%EB%9E%8C%EA%B0%9C%EB%B9%84.jpg" 
+            <img src={{image_url}} 
             width="500",height="500">
         <p>
             <h3>Qu'est-ce que la <span>série K</span></h3>
@@ -39,6 +39,8 @@
                 <input type = "submit" name="search" value="Search">
                 <input type = "reset" name="clear" vaule="Clear"><br>
             </form>
+            <h3>Mot le plus recherché</h3>
+                {{search1}}:{{search1_i}}fois   {{search2}}:{{search2_i}}fois   {{search3}}:{{search3_i}}fois   {{search4}}:{{search4_i}}fois   {{search5}}:{{search5_i}}fois
         <p>
             <div class="chart-area"> 
                 <div id="container" style="width:50%; height:100%;" >
