@@ -37,7 +37,7 @@
                 <h3>¿Qué quieres buscar?</h3>
                 K - <input name="input" type="text" size="10">
                 <input type = "submit" name="search" value="Search">
-                <input type = "reset" name="clear" vaule="Clear"><br>
+                <input type = "reset" name="clear" value="Clear"><br>
             </form>
         <p>
             <div class="chart-area"> 
@@ -45,13 +45,6 @@
                     <script> 
                         anychart.onDocumentReady(function () {
                             var data = {{cloud_list|tojson}};
-                                // { "x": "K-방역", "value": 5000, category: "government" },
-                                // { "x": "K-pop", "value": 3000, category: "culture" },
-                                // { "x": "K-뷰티", "value": 1000, category: "culture" },
-                                // { "x": "K-기업가정신", "value": 2000, category: "society" },
-                                // { "x": "K-교육", "value": 2500, category: "society" },
-                                // { "x": "K-푸드", "value": 5400, category: "culture" },
-                                // { "x": "K-의료", "value": 6400, category: "society" } 
                             var chart = anychart.tagCloud(data); 
                             chart.angles([0]); 
                             chart.container("container"); 
