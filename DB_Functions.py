@@ -108,7 +108,7 @@ def getMeme(search_word : str ):
 def addMeme(newMeme):
     if (searchMeme(newMeme) == 1):
        # print("this meme is already in DB update it")
-        updateUseFreq(newMeme,1)
+        updateUseFreq(newMeme,newMeme.useFreq)
         return False
 
     conn = pymysql.connect(host='localhost', user='root', password='k-oo1234', db='KOO', charset='utf8')
