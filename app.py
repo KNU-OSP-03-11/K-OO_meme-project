@@ -38,6 +38,12 @@ def home():
     randnum=random.randrange(len(image_list))
     return render_template('home.html',cloud_list=cloud_list,image_url=image_list[randnum])
 
+
+@app.route('/home_english/')
+def home_english():
+    randnum=random.randrange(len(image_list))
+    return render_template('home_english.html',cloud_list=cloud_list,image_url=image_list[randnum])    
+
 @app.route('/home_japanese/')
 def home_japanese():
     randnum=random.randrange(len(image_list))
