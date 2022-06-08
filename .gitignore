@@ -2,3 +2,4 @@ pyvenv/
 /dvenv
 sample.py
 output.txt
+__pycache__/
