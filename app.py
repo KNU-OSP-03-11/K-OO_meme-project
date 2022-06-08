@@ -4,7 +4,15 @@ from flask import render_template
 from flask import redirect, url_for, request
 from DB_Functions import getMeme, rankFreq, updateSearchFreq, initMeme
 import random
+file = open('image_source.txt','r')
+image_list=[]
+while True:
+    tp = file.readline()
+    if tp =='':
+        break
+    image_list.append(tp)
 
+    
 app = Flask(__name__)
 
 
@@ -27,29 +35,28 @@ def gohome():
 
 @app.route('/home/')
 def home():
-    return render_template('home.html',cloud_list=cloud_list)
-
-
-@app.route('/home_english/')
-def home_english():
-    return render_template('home_english.html',cloud_list=cloud_list)
-
+    randnum=random.randrange(len(image_list))
+    return render_template('home.html',cloud_list=cloud_list,image_url=image_list[randnum])
 
 @app.route('/home_japanese/')
 def home_japanese():
-    return render_template('home_japanese.html',cloud_list=cloud_list)
+    randnum=random.randrange(len(image_list))
+    return render_template('home_japanese.html',cloud_list=cloud_list,image_url=image_list[randnum])
 
 @app.route('/home_chinese/')
 def home_chinese():
-    return render_template('home_chinese.html',cloud_list=cloud_list)
+    randnum=random.randrange(len(image_list))
+    return render_template('home_chinese.html',cloud_list=cloud_list,image_url=image_list[randnum])
 
 @app.route('/home_french/')
 def home_french():
-    return render_template('home_french.html',cloud_list=cloud_list)
+    randnum=random.randrange(len(image_list))
+    return render_template('home_french.html',cloud_list=cloud_list,image_url=image_list[randnum])
 
 @app.route('/home_spanish/')
 def home_spanish():
-    return render_template('home_spanish.html',cloud_list=cloud_list)
+    randnum=random.randrange(len(image_list))
+    return render_template('home_spanish.html',cloud_list=cloud_list,image_url=image_list[randnum])
 
 
 
