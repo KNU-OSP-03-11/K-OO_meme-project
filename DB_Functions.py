@@ -190,7 +190,7 @@ def rankFreq(numOfRank, useOrSearch):
     cur = conn.cursor()
 
     if (useOrSearch ==1):
-        cur.execute("SELECT * FROM KOOtable ORDER BY %s DESC",'searchFreq')
+        cur.execute("SELECT * FROM KOOtable ORDER BY searchFreq DESC")
     else:
         cur.execute("SELECT * FROM KOOtable ORDER BY useFreq DESC")
     row = cur.fetchmany(size = numOfRank)
@@ -199,6 +199,7 @@ def rankFreq(numOfRank, useOrSearch):
     conn.close()
 
     return row
+
 
 # Delete meme. parameter: memeClass, return: boolean
 def delMeme(delMeme):

@@ -19,7 +19,6 @@ app = Flask(__name__)
 # get data from db
 rank_list = rankFreq(20,0)
 cloud_list = []
-
 for element in rank_list:
     cloud_list.append(
     {
@@ -27,7 +26,8 @@ for element in rank_list:
         "value":element[4],
         "category":"{}".format(str(random.randrange(1,10)))
     }
-)
+    )
+search_list = []
 
 @app.route('/')
 def gohome():
@@ -36,28 +36,140 @@ def gohome():
 @app.route('/home/')
 def home():
     randnum=random.randrange(len(image_list))
-    return render_template('home.html',cloud_list=cloud_list,image_url=image_list[randnum])
+    rank_list_s = rankFreq(5,1)
+    search_list.clear()
+    for element in rank_list_s:
+        search_list.append([element[1],element[5]])
+    return render_template(
+        'home.html',
+        cloud_list=cloud_list,
+        image_url=image_list[randnum],
+        search1 = search_list[0][0],
+        search1_i = search_list[0][1],
+        search2 = search_list[1][0],
+        search2_i = search_list[1][1],
+        search3 = search_list[2][0],
+        search3_i = search_list[2][1],
+        search4 = search_list[3][0],
+        search4_i = search_list[3][1],
+        search5 = search_list[4][0],
+        search5_i = search_list[4][1],
+        )
+
+@app.route('/home_english/')
+def home_english():
+    randnum=random.randrange(len(image_list))
+    rank_list_s = rankFreq(5,1)
+    search_list.clear()
+    for element in rank_list_s:
+        search_list.append([element[1],element[5]])
+    return render_template(
+        'home_english.html',
+        cloud_list=cloud_list,
+        image_url=image_list[randnum],
+        search1 = search_list[0][0],
+        search1_i = search_list[0][1],
+        search2 = search_list[1][0],
+        search2_i = search_list[1][1],
+        search3 = search_list[2][0],
+        search3_i = search_list[2][1],
+        search4 = search_list[3][0],
+        search4_i = search_list[3][1],
+        search5 = search_list[4][0],
+        search5_i = search_list[4][1],
+        )
 
 @app.route('/home_japanese/')
 def home_japanese():
     randnum=random.randrange(len(image_list))
-    return render_template('home_japanese.html',cloud_list=cloud_list,image_url=image_list[randnum])
+    rank_list_s = rankFreq(5,1)
+    search_list.clear()
+    for element in rank_list_s:
+        search_list.append([element[1],element[5]])
+    return render_template(
+        'home_japanese.html',
+        cloud_list=cloud_list,
+        image_url=image_list[randnum],
+        search1 = search_list[0][0],
+        search1_i = search_list[0][1],
+        search2 = search_list[1][0],
+        search2_i = search_list[1][1],
+        search3 = search_list[2][0],
+        search3_i = search_list[2][1],
+        search4 = search_list[3][0],
+        search4_i = search_list[3][1],
+        search5 = search_list[4][0],
+        search5_i = search_list[4][1],
+        )
 
 @app.route('/home_chinese/')
 def home_chinese():
     randnum=random.randrange(len(image_list))
-    return render_template('home_chinese.html',cloud_list=cloud_list,image_url=image_list[randnum])
+    rank_list_s = rankFreq(5,1)
+    search_list.clear()
+    for element in rank_list_s:
+        search_list.append([element[1],element[5]])
+    return render_template(
+        'home_chinese.html',
+        cloud_list=cloud_list,
+        image_url=image_list[randnum],
+        search1 = search_list[0][0],
+        search1_i = search_list[0][1],
+        search2 = search_list[1][0],
+        search2_i = search_list[1][1],
+        search3 = search_list[2][0],
+        search3_i = search_list[2][1],
+        search4 = search_list[3][0],
+        search4_i = search_list[3][1],
+        search5 = search_list[4][0],
+        search5_i = search_list[4][1],
+        )
 
 @app.route('/home_french/')
 def home_french():
     randnum=random.randrange(len(image_list))
-    return render_template('home_french.html',cloud_list=cloud_list,image_url=image_list[randnum])
+    rank_list_s = rankFreq(5,1)
+    search_list.clear()
+    for element in rank_list_s:
+        search_list.append([element[1],element[5]])
+    return render_template(
+        'home_french.html',
+        cloud_list=cloud_list,
+        image_url=image_list[randnum],
+        search1 = search_list[0][0],
+        search1_i = search_list[0][1],
+        search2 = search_list[1][0],
+        search2_i = search_list[1][1],
+        search3 = search_list[2][0],
+        search3_i = search_list[2][1],
+        search4 = search_list[3][0],
+        search4_i = search_list[3][1],
+        search5 = search_list[4][0],
+        search5_i = search_list[4][1],
+        )
 
 @app.route('/home_spanish/')
 def home_spanish():
     randnum=random.randrange(len(image_list))
-    return render_template('home_spanish.html',cloud_list=cloud_list,image_url=image_list[randnum])
-
+    rank_list_s = rankFreq(5,1)
+    search_list.clear()
+    for element in rank_list_s:
+        search_list.append([element[1],element[5]])
+    return render_template(
+        'home_spanish.html',
+        cloud_list=cloud_list,
+        image_url=image_list[randnum],
+        search1 = search_list[0][0],
+        search1_i = search_list[0][1],
+        search2 = search_list[1][0],
+        search2_i = search_list[1][1],
+        search3 = search_list[2][0],
+        search3_i = search_list[2][1],
+        search4 = search_list[3][0],
+        search4_i = search_list[3][1],
+        search5 = search_list[4][0],
+        search5_i = search_list[4][1],
+        )
 
 
 
