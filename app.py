@@ -35,6 +35,26 @@ def home_english():
     return render_template('home_english.html',cloud_list=cloud_list)
 
 
+@app.route('/home_japanese/')
+def home_japanese():
+    return render_template('home_japanese.html',cloud_list=cloud_list)
+
+@app.route('/home_chinese/')
+def home_chinese():
+    return render_template('home_chinese.html',cloud_list=cloud_list)
+
+@app.route('/home_french/')
+def home_french():
+    return render_template('home_french.html',cloud_list=cloud_list)
+
+@app.route('/home_spanish/')
+def home_spanish():
+    return render_template('home_spanish.html',cloud_list=cloud_list)
+
+
+
+
+
 @app.route('/search',methods=['POST'])
 def search(input=None):
     if request.method == 'POST':
