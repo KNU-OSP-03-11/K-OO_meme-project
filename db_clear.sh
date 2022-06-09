@@ -1,6 +1,8 @@
 #!/bin/bash
 
 sudo mysql -u root -p << EOF
+use mysql;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'k-oo1234';
 DROP DATABASE KOO;
 CREATE DATABASE KOO;
 use KOO;
