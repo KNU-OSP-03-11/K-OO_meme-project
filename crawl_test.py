@@ -54,7 +54,7 @@ def process( soup_selction_list ):
 
 url_list = []
 url_list.append(u'https://search.naver.com/search.naver?where=news&query=K&sm=tab_opt&sort=0&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Aall&is_sug_officeid=0')
-for i in range(1,10):
+for i in range(1,1000):
     url_list.append(u"https://search.naver.com/search.naver?where=news&sm=tab_pge&query=K&sort=0&photo=0&field=0&pd=0&ds=&de=&cluster_rank=18&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so:r,p:all,a:all&start={}1".format(i))
 global DATA_dic
 DATA_dic = {}

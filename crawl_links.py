@@ -9,7 +9,7 @@ from DB_Functions import * # mysql functions
 okt = Okt() # 한글 명사분석
 global check
 check = 0
-rank_list = rankFreq(10,0)
+rank_list = rankFreq(50,0)
 # process for collecting only words
 def process( soup_selction_list ):
     global check
@@ -29,7 +29,7 @@ def process( soup_selction_list ):
         
 
 url_list = []
-for i in range(10):
+for i in range(50):
     url_list.append(u'https://search.naver.com/search.naver?where=news&query={}&sm=tab_opt&sort=0&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=0&office_type=0&office_section_code=0&news_office_checked=&nso=so%3Ar%2Cp%3Aall&is_sug_officeid=0'.format(rank_list[i][1]))
 global top_url
 top_url = []
