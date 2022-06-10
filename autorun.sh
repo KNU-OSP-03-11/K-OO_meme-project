@@ -2,11 +2,13 @@
 # autorun file for autostarting webpage service
 
 # check for update
+echo "update start"
 sudo apt-get update -y
 sudo apt-get upgrade -y
 echo "update complete!"
 
 # install python environment
+echo "python setup start"
 if which python > /dev/null;then
     echo "python already installed"
     if which python3 > /dev/null;then
@@ -29,7 +31,9 @@ sudo apt install python3-pip -y
 sudo apt-get install python3-venv -y
 echo "python setup complete!"
 
+
 # install java environment
+echo "java setup start"
 if which java > /dev/null; then
     echo "java already installed"
     if which javac > /dev/null; then
@@ -45,19 +49,25 @@ javac --version
 echo "java setup complete!"
 
 # start python venv environment
+echo "python venv start"
 python -m venv pyvenv
 source pyvenv/bin/activate
 pip install -r requirements.txt
 echo "python venv setup complete!"
 
+# install mySQL
+echo "mySQL setup start"
 if which mysql > /dev/null; then
-    echo "mysql already installed"
+    echo "mySQL already installed"
+    echo "password for mySQL required"
+    echo "if you didn't setup password, please check 'readme_if_mysql_requests_password.txt'"
     chmod 755 db_clear.sh
     ./db_clear.sh
 else
     sudo apt-get install mysql-server mysql-client -y
     sudo mysql --version
     sudo service mysql start
+    echo "if 'password : ' appears, please press enter key"
     sudo mysqladmin -u root create KOO -p
     sudo mysql -u root -p << EOF
 use mysql;
@@ -90,12 +100,19 @@ CREATE TABLE LINKtable
 \q
 EOF
 fi
-echo "mysql ready!"
+echo "mySQL ready!"
+
 # run program
+echo "data crawling start"
+# start crawling from title
 python crawl_test.py
+# add top 50 words with additional title
 python crawl_links.py
 echo "data crawling complete"
-python app.py
+
+# flask web service run
 echo "flask web service start"
+python app.py
+
 
 
