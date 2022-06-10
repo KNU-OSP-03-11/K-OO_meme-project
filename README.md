@@ -15,7 +15,7 @@ KNU - OSP final project
 # After initial run(with mySQL ready)
 - $ chmod 755 afterrun.sh
 - $ ./afterrun.sh
-- if mySQL is not ready, please run autorun.sh once again
+## if mySQL is not ready, please run autorun.sh once again
 # What is "K-[  ]" ?
 Korea의 첫글자 K를 사용해서 "한국산, 한국적, 한국식, 한국형"을 뜻합니다.
 </br>(It means "Things that are Korean" using the first letter of Korea.)
@@ -26,3 +26,13 @@ _____
 - K-리그(K-League)
 - K-POP
 - K-뷰티(K-beauty)
+
+## 수동으로 실행하고자 할 경우(manual run)
+- autorun.sh를 통해서 필요한 파일이 설치 되어 있다 가정합니다.
+</br>(python,java,pip,python-venv,mysql)
+- $ source pyvenv/bin/activate
+- $ chmod 755 db_clear.sh
+- $ ./db_clear.sh
+- $ python crawl_test.py
+- $ python crawl_list.py
+- $ flask run
